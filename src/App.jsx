@@ -1,23 +1,7 @@
 import * as React from 'react';
+import TodoList from './TodoList';
+import AddTodoForm from './AddTodoForm';
 
-const todoList = [
-  {
-    id: 1,
-    title: 'Setup Github repo'
-  },
-  {
-    id: 2,
-    title: 'Create Vite app'
-  },
-  {
-    id: 3,
-    title: 'Complete assignment'
-  },
-  {
-    id: 4,
-    title: 'Push branch to Github'
-  },
-]
 
 function App() {
 
@@ -26,11 +10,8 @@ function App() {
     <div>
       <h1>Todo List</h1>
 
-      <ul>
-        {todoList.map((item) => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
+    <AddTodoForm />
+     <TodoList />
 
     </div>
   )
