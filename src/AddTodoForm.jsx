@@ -9,11 +9,13 @@ const AddTodoForm = ({ onAddTodo }) => {
         //event.target.elements.todoTitle.value;
         //event.target.elements.title.value;
         //event.target.todoTitle.value
-        //event.target.title.value
-        const todoTitle = event.target[0].value;
+        //event.target[0].value
+        const todoTitle = event.target.title.value;
         console.log(todoTitle)
         onAddTodo(todoTitle)
-        event.target[0].value = ''
+        // Can also be used to reset target
+        // event.target[0].value = ''
+        event.target.reset();
      }
 
     return(
