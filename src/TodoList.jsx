@@ -1,28 +1,28 @@
-import * as React from 'react';
+import React from 'react';
 import TodoListItem from './TodoListItem'
 
 
-const todoList = [
-    {
-      id: 1,
-      title: 'Setup Github repo'
-    },
-    {
-      id: 2,
-      title: 'Create Vite app'
-    },
-    {
-      id: 3,
-      title: 'Complete assignment'
-    },
-    {
-      id: 4,
-      title: 'Push branch to Github'
-    },
-  ];
+// const todoList = [
+//     {
+//       id: 1,
+//       title: 'Setup Github repo'
+//     },
+//     {
+//       id: 2,
+//       title: 'Create Vite app'
+//     },
+//     {
+//       id: 3,
+//       title: 'Complete assignment'
+//     },
+//     {
+//       id: 4,
+//       title: 'Push branch to Github'
+//     },
+//   ];
 
 
-const TodoList = () => {
+const TodoList = ({ todoList }) => {
     return (
         <div>
             <ul>
