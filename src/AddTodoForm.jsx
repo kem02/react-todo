@@ -21,7 +21,7 @@ const AddTodoForm = ({ onAddTodo }) => {
 
         console.log(todoTitle)
         onAddTodo({
-            "id": Date.now,
+            "id": Date.now(),
             "title": todoTitle
         })
 
