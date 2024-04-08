@@ -22,12 +22,12 @@ import TodoListItem from './TodoListItem'
 //   ];
 
 
-const TodoList = ({ todoList }) => {
+const TodoList = ({ todoList, onRemoveTodo }) => {
     return (
         <div>
             <ul>
                 {todoList.map((item) => (
-                    <TodoListItem key={item.id} todo={item} />
+                    <TodoListItem key={item.id} todo={item} onRemoveTodo={onRemoveTodo} />
                 ))}
             </ul>
         </div>
