@@ -2,29 +2,35 @@ import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
-const useSemiPersistentState = () => {
-  // JSON.parse converts the string back into an array, which is the expected format for todoList state.
-  const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem('savedTodoList')) || []
-  );
-
-
-  useEffect(() => {
-    // localStorage can only store strings. 
-    // This means that when you have an array or object that
-    // you want to store in localStorage, you need to convert it into a string. 
-    const stringTodoList = JSON.stringify(todoList)
-    localStorage.setItem('savedTodoList', stringTodoList)
-  }, [todoList])
-
-  return [todoList, setTodoList]
-}
-
-
 
 function App() {
 
-  const [todoList, setTodoList] = useSemiPersistentState()
+  const [todoList, setTodoList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+
+    new Promise((resolve, reject) =>
+      setTimeout(() => resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) } }), 2000)
+    ).then(result => {
+      setTodoList(result.data.todoList);
+      setIsLoading(false)
+    });
+
+
+  }, [])
+
+
+  useEffect(() => {
+    if (!isLoading) {
+      // localStorage can only store strings. 
+      // This means that when you have an array or object that
+      // you want to store in localStorage, you need to convert it into a string. 
+      const stringTodoList = JSON.stringify(todoList)
+      localStorage.setItem('savedTodoList', stringTodoList)
+    }
+
+  }, [todoList])
 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
@@ -41,11 +47,13 @@ function App() {
       <h1>Todo List</h1>
 
       <AddTodoForm onAddTodo={addTodo} />
-      {/* <p>{newTodo}</p> */}
-      <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+
+      {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+
 
     </>
   )
 }
 
 export default App
+
