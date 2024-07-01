@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
 const InputWithLabel = ({todoTitle, handleTitleChange, children}) => {
     const inputRef = useRef();
@@ -13,6 +14,12 @@ const InputWithLabel = ({todoTitle, handleTitleChange, children}) => {
             <input ref={inputRef} id='todoTitle' value={todoTitle} onChange={handleTitleChange} name='title'/>
         </>
     )
-}
+};
+
+InputWithLabel.propTypes ={
+    todoTitle:PropTypes.string.isRequired,
+    handleTitleChange: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired
+};
 
 export default InputWithLabel;
