@@ -19,7 +19,7 @@ function App() {
       },
     };
 
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}?Default=Grid%20&sort[0][field]=title&sort[0][direction]=asc`;
 
     try {
 
@@ -32,6 +32,22 @@ function App() {
 
       const data = await response.json();
       // console.log(data);
+
+      data.records.sort((ObjectA,ObjectB) => {
+
+        const titleA = ObjectA.fields.title;
+        const titleB = ObjectB.fields.title;
+
+        if (titleA < titleB){
+          return -1;
+        }
+        if (titleA > titleB){
+          return 1;
+        } 
+        if (titleA == titleB){
+          return 0
+        }
+      })
 
       const todos = data.records.map((todo) => {
 
