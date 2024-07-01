@@ -1,0 +1,33 @@
+.form {
+    margin-bottom: 5px;
+    font-size: x-large;
+}
+
+input{
+    margin: 0 5px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    outline: none;
+    color: white;
+    font-family: fantasy;
+
+}
+
+
+button {
+    background-color: #ffffff00;
+    color: #fff;
+    width: 4rem;
+    height: 2rem;
+    border: limegreen 0.2em solid;
+    border-radius: 11px;
+    text-align: center;
+    transition: all 0.6s ease;
+}
+
+button:hover {
+    background-color: limegreen;
+    cursor: pointer;
+}
+
