@@ -19,7 +19,7 @@ function App() {
       },
     };
 
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}?Default=Grid%20&sort[0][field]=title&sort[0][direction]=asc`;
 
     try {
 
@@ -32,6 +32,22 @@ function App() {
 
       const data = await response.json();
       // console.log(data);
+
+      data.records.sort((ObjectA,ObjectB) => {
+
+        const titleA = ObjectA.fields.title;
+        const titleB = ObjectB.fields.title;
+
+        if (titleA < titleB){
+          return -1;
+        }
+        if (titleA > titleB){
+          return 1;
+        } 
+        if (titleA == titleB){
+          return 0
+        }
+      })
 
       const todos = data.records.map((todo) => {
 
@@ -93,6 +109,35 @@ function App() {
 
   }
 
+
+  const deleteTodo = async (id) => {
+
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+      }
+    };
+
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}/${id}`
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.status) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const dataResponse = await response.json();
+
+      return dataResponse;
+
+    } catch (error) {
+      console.log(error.message);
+    }
+
+  };
+
   useEffect(() => {
 
     fetchData();
@@ -134,10 +179,27 @@ function App() {
   }
 
   const removeTodo = (id) => {
+    deleteTodo(id)
     const newDeletedTodo = todoList.filter((todo) => todo.id !== id)
 
     setTodoList(newDeletedTodo)
   }
+
+  const NextPage = () => (
+    <div className={style.nextPage}>
+      <h1>New Todo List Under Construction</h1>
+    </div>
+  )
+  /* 
+    Can also use jsx element instead of component:
+
+    const nextPage = (
+      <div className={style.nextPage}>
+        <h1>New Todo List Under Construction</h1>
+      </div>
+    );
+
+  */
 
   return (
     <BrowserRouter>
@@ -149,7 +211,7 @@ function App() {
             {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
           </div>
         } />
-        <Route path="/new" element={<h1>New Todo List</h1>} />
+        <Route path="/new" element={<NextPage/>} />
       </Routes>
     </BrowserRouter>
   )
