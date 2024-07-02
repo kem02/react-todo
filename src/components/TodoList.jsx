@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoListItem from './TodoListItem'
 import style from './TodoList.module.css'
+import PropTypes from "prop-types";
 
 
 // const todoList = [
@@ -33,6 +34,11 @@ const TodoList = ({ todoList, onRemoveTodo }) => {
             </ul>
         </div>
     )
-}
+};
+
+TodoList.prototype ={
+    todoList: PropTypes.array.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
+  };
 
 export default TodoList;
