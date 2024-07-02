@@ -1,0 +1,13 @@
+.ListItem{
+    color: limegreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.trashButton{
+    margin-left: 1rem;
+    width: 17px;
+    height: 17px;
+}

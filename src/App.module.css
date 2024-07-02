@@ -1,0 +1,23 @@
+.parentContainer{
+    border: 1px solid limegreen;
+    box-shadow: rgba(3, 191, 119, 0.2) 0 0 90px 33px;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem;
+    color: white;
+    
+}
+
+body{
+    font-family: fantasy, serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 17, 17);
+}
+
